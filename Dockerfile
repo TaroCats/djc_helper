@@ -33,10 +33,8 @@ RUN bash _ubuntu_download_and_install_chrome_and_driver.sh
 #ARG pip_index_url=https://pypi.org/simple
 ARG pip_index_url=https://pypi.tuna.tsinghua.edu.cn/simple
 COPY requirements_docker.txt requirements_z_base.txt ./
-RUN set -x \
-    && PATH="$PATH:$HOME/.local/bin" \
-    && python3 -m pip install -i $pip_index_url --no-cache-dir --user --upgrade pip setuptools wheel \
-    && pip3 install -i $pip_index_url --no-cache-dir -r requirements_docker.txt
+RUN python3 -m pip install --no-cache-dir --upgrade pip setuptools wheel \
+ && python3 -m pip install --no-cache-dir -i $pip_index_url -r requirements_docker.txt
 
 # 可通过以下两种方式传入配置
 # 1. 环境变量（正式环境推荐该方式）
